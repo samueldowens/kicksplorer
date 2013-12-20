@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
-          if Time.at(project["deadline"]) > Time.now
+          if Time.at(project["deadline"]) > Time.now && project["pledged"] >= (project["goal"] * 0.2)
             Project.find_or_create_by(
               name: project["name"], 
               blurb: project["blurb"], 
@@ -43,6 +43,14 @@ class Project < ActiveRecord::Base
       letter.next!
       page_num = 1
     end
+  end
+
+  def self.categories
+    list = []
+    Project.all.each do |project|
+      list << project.category
+    end
+    list.uniq.sort
   end
 
 end
