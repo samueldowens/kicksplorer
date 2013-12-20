@@ -9,13 +9,14 @@ class Project < ActiveRecord::Base
     letter = "a"
     page_num = 1
     while letter != "aa"
-      while page_num < 21
+      while page_num < 31
         url = URI.parse("http://www.kickstarter.com/projects/search.json?page=#{page_num}&term=#{letter}")
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
           if Time.at(project["deadline"]) > Time.now && project["pledged"] >= (project["goal"] * 0.2)
-            Project.find_or_create_by(
+            proj = Project.find_or_create_by(name: project["name"])
+            proj.update(
               name: project["name"], 
               blurb: project["blurb"], 
               goal: project["goal"], 
@@ -34,8 +35,7 @@ class Project < ActiveRecord::Base
               category: project["category"]["name"], 
               urls: project["urls"]["web"]["project"]
             )
-            puts letter
-            puts page_num
+            proj.save
           end
         end
         page_num += 1
@@ -43,6 +43,16 @@ class Project < ActiveRecord::Base
       letter.next!
       page_num = 1
     end
+    self.remove_expired
+  end
+
+  def self.remove_expired
+    tbd = Project.all.select {|project| Time.now > Time.at(project.deadline)}
+      if tbd 
+        tbd.each do |project|
+          project.destroy
+        end
+      end
   end
 
   def self.categories
