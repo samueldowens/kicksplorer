@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/anjlab/bootstrap-rails.git
+  revision: 461121444e24cdf78357418bfca9f2b8a9a1c518
+  specs:
+    anjlab-bootstrap-rails (3.0.3.0)
+      railties (>= 3.0)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,11 +60,8 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
-    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
     polyglot (0.3.3)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -116,11 +121,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  anjlab-bootstrap-rails!
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
   json
-  nokogiri
   pry
   rails (= 4.0.2)
   sass-rails (~> 4.0.0)

@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
-          if Time.at(project["deadline"]) > Time.now || Project.where(name: project["name"]) && project["pledged"] >= (project["goal"] * 0.2)
+          if Time.at(project["deadline"]) > Time.now || !Project.where(name: project["name"]).empty? && project["pledged"] >= (project["goal"] * 0.2)
             proj = Project.find_or_create_by(name: project["name"])
             proj.update(
               name: project["name"], 
@@ -26,7 +26,7 @@ class Project < ActiveRecord::Base
               currency: project["currency"], 
               currency_symbol: project["currency_symbol"], 
               deadline: project["deadline"], 
-              created_at: project["created_at"], 
+              # created_at: project["created_at"], 
               launched_at: project["launched_at"], 
               backers_count: project["backers_count"], 
               photo: project["photo"]["full"], 
@@ -36,6 +36,8 @@ class Project < ActiveRecord::Base
               urls: project["urls"]["web"]["project"]
             )
             proj.save
+            puts letter
+            puts page_num
           end
         end
         page_num += 1
@@ -43,11 +45,11 @@ class Project < ActiveRecord::Base
       letter.next!
       page_num = 1
     end
-    self.remove_expired
+    # self.remove_expired
   end
 
   def self.remove_expired
-    tbd = Project.all.select {|project| Time.now || Project.where(name: project["name"]) > Time.at(project.deadline) || Project.where(name: project["name"])}
+    tbd = Project.all.select {|project| Time.at(project.deadline) < Time.now }
       if !tbd.empty? 
         tbd.each do |project|
           project.destroy

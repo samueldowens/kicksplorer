@@ -1,9 +1,38 @@
-<div style="text-align:center;">
-  <h1>Welcome to Kicksplorer</h1>
-  <br>
-  <%= form_for @project, url: {action: "search"} do |f| %>
-  <%= f.label :category, "Please Select A Category" %>
-  <%= f.select :category, Project.categories %>
-  <%= f.submit "Kicksplore!", remote: true %>
-  <% end %>
+<div class="container">
+  <div class="header">
+    
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="#">Home</a>
+      </li>
+
+      <li>
+        <a href="#">About</a>
+      </li>
+
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+
+    <h3 class="text-muted">Kicksplorer</h3>
+  </div>
+
+  <div class="jumbotron" style="margin-top: 25px; text-align:center;">
+    <h1>Welcome To Kicksplorer</h1>
+
+    <p class="lead">
+      Select a category and click 'Kicksplore!' To check out some great, likely to succeed Kickstarter Projects!
+    </p>
+
+        <%= form_for @project, url: {action: "kicksplore"} do |f| %>
+        <%= f.label :category, "Please Select A Category" %>
+        <%= f.select :category, Project.categories, style: 'height: 30px;' %>
+        <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
+        <% end %>
+
+    <p>
+   </p>
+
+  </div>
 </div>

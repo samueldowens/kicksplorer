@@ -1,26 +1,68 @@
-<div style="text-align:center;">
-  <h1>Welcome to Kicksplorer</h1>
-  <br>
-  <%= form_for @project, url: {action: "search"} do |f| %>
-  <%= f.label :category, "Please Select A Category" %>
-  <%= f.select :category, Project.categories %>
-  <%= f.submit "Kicksplore!", remote: true %>
-  <% end %>
-</div>
+<head>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
 
-<div style="text-align: center;">
-  <h2><%= @project.name %></h2><br>
-  <img src="<%= @project.photo %>">
-  <br>
-  Project Category: <%= @project.category %>
-  <br>
-  <%= @project.blurb %>
-  <br>
-  This project is currently funded at  <%= @project.currency_symbol %><%= @project.pledged %> with a goal of <%= @project.currency_symbol %><%= @project.goal %>
-  <br>
-  This project is currently backed by <%= @project.backers_count %> backers.
-  <br>
-  It expires in <%= distance_of_time_in_words(Time.now, Time.at(@project.deadline)) %>
-  <br>
-  If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank">Kickstarter</a>
+<div class="container">
+  <div class="header">
+    
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="#">Home</a>
+      </li>
+
+      <li>
+        <a href="#">About</a>
+      </li>
+
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+
+    <h3 class="text-muted">Kicksplorer</h3>
+  </div>
+
+  <div class="jumbotron" style="margin-top: 25px; text-align:center;">
+    <h1>Welcome To Kicksplorer</h1>
+
+    <p class="lead">
+      Select a category and click 'Kicksplore!' To check out some great, likely to succeed Kickstarter Projects!
+    </p>
+
+        <%= form_for @project, url: {action: "kicksplore"} do |f| %>
+        <%= f.label :category, "Please Select A Category" %>
+        <%= f.select :category, Project.categories, style: 'height: 30px;' %>
+        <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
+        <% end %>
+
+    <p>
+   </p>
+
+  </div>
+
+  <div class="row marketing">
+    <div class="col-lg-6">
+      <img src="<%= @project.photo %>" style="border-radius: 5px;">
+    </div>
+
+    <div class="col-lg-6">
+      <h4><%= @project.name %></h4><br>
+        Project Category: <%= @project.category %>
+        <br><br>
+        <%= @project.blurb %>
+        <br><br>
+        This project is currently funded at  <%= @project.currency_symbol %><%= @project.pledged %> with a goal of <%= @project.currency_symbol %><%= @project.goal %>
+        <br><br>
+        This project is currently backed by <%= @project.backers_count %> backers.
+        <br><br>
+        It expires in <%= distance_of_time_in_words(Time.now, Time.at(@project.deadline)) %>
+        <br><br>
+        If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank">Kickstarter</a>
+    </div>
+  </div>
+<br><br>
+  <div class="footer">
+  </div>
 </div>
