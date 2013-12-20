@@ -1,7 +1,9 @@
-<h1>Welcome to Kicksplorer</h1>
-<br>
-<%= form_for @project, url: {action: "search"} do |f| %>
-<%= f.label :category, "Please Select A Category" %>
-<%= f.select :category, Project.categories %>
-<%= f.submit "Kicksplore!" %>
-<% end %>
+<div style="text-align:center;">
+  <h1>Welcome to Kicksplorer</h1>
+  <br>
+  <%= form_for @project, url: {action: "search"} do |f| %>
+  <%= f.label :category, "Please Select A Category" %>
+  <%= f.select :category, Project.categories %>
+  <%= f.submit "Kicksplore!", remote: true %>
+  <% end %>
+</div>

@@ -5,8 +5,11 @@ class ProjectsController < ApplicationController
   end
 
   def search
-    project = Project.where(category: params["project"]["category"]).shuffle.first
-    redirect_to kicksplore_path(project)
+    @project = Project.where(category: params["project"]["category"]).shuffle.first
+
+    render partial: 'kicksplore'
+
+    # redirect_to kicksplore_path(@project)
   end
 
   def kicksplore

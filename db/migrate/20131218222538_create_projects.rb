@@ -9,9 +9,9 @@ class CreateProjects < ActiveRecord::Migration
       t.string :country
       t.string :currency
       t.string :currency_symbol
-      t.datetime :deadline
-      t.datetime :created_at
-      t.datetime :launched_at
+      t.integer :deadline
+      t.integer :created_at
+      t.integer :launched_at
       t.integer :backers_count
       t.string :photo
       t.string :creator

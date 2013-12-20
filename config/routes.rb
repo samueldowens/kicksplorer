@@ -2,7 +2,7 @@ Kicksplorer::Application.routes.draw do
 
   root 'projects#index'
 
-  post 'search', to: 'projects#search'
+  patch 'search', to: 'projects#search', to: [:get, :post]
   get  'kicksplore', to: 'projects#kicksplore', as: 'kicksplore'
 
 

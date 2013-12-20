@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
-          if Time.at(project["deadline"]) > Time.now && project["pledged"] >= (project["goal"] * 0.2)
+          if Time.at(project["deadline"]) > Time.now || Project.where(name: project["name"]) && project["pledged"] >= (project["goal"] * 0.2)
             proj = Project.find_or_create_by(name: project["name"])
             proj.update(
               name: project["name"], 
@@ -47,8 +47,8 @@ class Project < ActiveRecord::Base
   end
 
   def self.remove_expired
-    tbd = Project.all.select {|project| Time.now > Time.at(project.deadline)}
-      if tbd 
+    tbd = Project.all.select {|project| Time.now || Project.where(name: project["name"]) > Time.at(project.deadline) || Project.where(name: project["name"])}
+      if !tbd.empty? 
         tbd.each do |project|
           project.destroy
         end

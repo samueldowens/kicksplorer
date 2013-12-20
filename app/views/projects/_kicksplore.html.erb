@@ -1,0 +1,26 @@
+<div style="text-align:center;">
+  <h1>Welcome to Kicksplorer</h1>
+  <br>
+  <%= form_for @project, url: {action: "search"} do |f| %>
+  <%= f.label :category, "Please Select A Category" %>
+  <%= f.select :category, Project.categories %>
+  <%= f.submit "Kicksplore!", remote: true %>
+  <% end %>
+</div>
+
+<div style="text-align: center;">
+  <h2><%= @project.name %></h2><br>
+  <img src="<%= @project.photo %>">
+  <br>
+  Project Category: <%= @project.category %>
+  <br>
+  <%= @project.blurb %>
+  <br>
+  This project is currently funded at  <%= @project.currency_symbol %><%= @project.pledged %> with a goal of <%= @project.currency_symbol %><%= @project.goal %>
+  <br>
+  This project is currently backed by <%= @project.backers_count %> backers.
+  <br>
+  It expires in <%= distance_of_time_in_words(Time.now, Time.at(@project.deadline)) %>
+  <br>
+  If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank">Kickstarter</a>
+</div>
