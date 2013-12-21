@@ -28,11 +28,14 @@
         <%= form_for @project, url: {action: "kicksplore"} do |f| %>
         <%= f.label :category, "Please Select A Category" %>
         <%= f.select :category, Project.categories, style: 'height: 30px;' %>
-        <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
+        <%= f.submit "Kicksplore!", show_kicksplore_path, remote: true, class: "btn btn-lg btn-success" %>
         <% end %>
 
     <p>
    </p>
 
   </div>
+
+  <div class="testclass"></div>
+
 </div>

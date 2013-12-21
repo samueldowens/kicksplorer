@@ -6,7 +6,10 @@ class ProjectsController < ApplicationController
 
   def kicksplore
     @project = Project.where(category: params["project"]["category"]).shuffle.first
-    render partial: 'kicksplore'
+    
+    respond_to do |format|
+      format.js 
+    end
   end
 
 end
