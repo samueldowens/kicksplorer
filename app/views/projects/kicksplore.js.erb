@@ -1,0 +1,6 @@
+  $('.project').empty();
+  $('.project').append("<%= j render(partial: 'kicksplore', locals: {project: '@project'} ) %>");
+
+$(window).ready(function() {
+  $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+});

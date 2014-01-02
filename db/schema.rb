@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20131218222538) do
 
   create_table "projects", force: true do |t|
     t.string   "name"
+    t.integer  "ks_id"
     t.string   "blurb"
     t.integer  "goal"
     t.integer  "pledged"

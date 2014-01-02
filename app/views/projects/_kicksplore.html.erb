@@ -1,48 +1,3 @@
-<head>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-
-<div class="container">
-  <div class="header">
-    
-    <ul class="nav nav-pills pull-right">
-      <li class="active">
-        <a href="#">Home</a>
-      </li>
-
-      <li>
-        <a href="#">About</a>
-      </li>
-
-      <li>
-        <a href="#">Contact</a>
-      </li>
-    </ul>
-
-    <h3 class="text-muted">Kicksplorer</h3>
-  </div>
-
-  <div class="jumbotron" style="margin-top: 25px; text-align:center;">
-    <h1>Welcome To Kicksplorer</h1>
-
-    <p class="lead">
-      Select a category and click 'Kicksplore!' To check out some great, likely to succeed Kickstarter Projects!
-    </p>
-
-        <%= form_for @project, url: {action: "kicksplore"} do |f| %>
-        <%= f.label :category, "Please Select A Category" %>
-        <%= f.select :category, Project.categories, style: 'height: 30px;' %>
-        <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
-        <% end %>
-
-    <p>
-   </p>
-
-  </div>
-
-  <div class="row marketing">
     <div class="col-lg-6">
       <img src="<%= @project.photo %>" style="border-radius: 5px;">
     </div>
@@ -61,8 +16,3 @@
         <br><br>
         If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank">Kickstarter</a>
     </div>
-  </div>
-<br><br>
-  <div class="footer">
-  </div>
-</div>

@@ -18,14 +18,14 @@
     <h3 class="text-muted">Kicksplorer</h3>
   </div>
 
-  <div class="jumbotron" style="margin-top: 25px; text-align:center;">
-    <h1>Welcome To Kicksplorer</h1>
+  <div class="jumbotron">
+    <h1 class="jumbo">Welcome To Kicksplorer</h1>
 
-    <p class="lead">
+    <p class="lead jumbo">
       Select a category and click 'Kicksplore!' To check out some great, likely to succeed Kickstarter Projects!
     </p>
 
-        <%= form_for @project, url: {action: "kicksplore"} do |f| %>
+        <%= form_for @project, url: {action: "kicksplore"}, remote: true do |f| %>
         <%= f.label :category, "Please Select A Category" %>
         <%= f.select :category, Project.categories, style: 'height: 30px;' %>
         <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
@@ -35,4 +35,6 @@
    </p>
 
   </div>
+    <div class="row marketing project">
+    </div>
 </div>
