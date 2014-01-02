@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
   def index
     @project = Project.new
+    @start = Project.all.shuffle.first
   end
 
   def kicksplore

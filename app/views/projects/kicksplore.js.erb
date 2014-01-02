@@ -1,5 +1,5 @@
   $('.project').empty();
-  $('.project').append("<%= j render(partial: 'kicksplore', locals: {project: '@project'} ) %>");
+  $('.project').hide().append("<%= j render(partial: 'kicksplore', locals: {project: '@project'} ) %>").fadeIn(300);
 
 $(window).ready(function() {
   $('html, body').animate({scrollTop:$(document).height()}, 'slow');
