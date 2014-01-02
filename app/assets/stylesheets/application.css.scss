@@ -12,3 +12,8 @@
  *= require_tree .
  */
 @import "twitter/bootstrap";
+@font-face {
+  font-family: 'RNS-B';
+  src: url('/vendor/assets/fonts/RNS-B.ttf');
+  src: url('/vendor/assets/fonts/RNS-B.ttf') format('truetype');
+}
