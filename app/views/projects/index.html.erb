@@ -2,24 +2,24 @@
   <div class="header">
     
     <ul class="nav nav-pills pull-right">
-      <li class="active">
-        <a href="#">Home</a>
+      <li>
+        <a href="#" class="menuitem">Home</a>
       </li>
 
       <li>
-        <a href="#">About</a>
+        <a href="#" class="menuitem">About</a>
       </li>
 
       <li>
-        <a href="#">Contact</a>
+        <a href="#" class="menuitem">Contact</a>
       </li>
     </ul>
 
-    <h3 class="text-muted kickfont">Kicksplorer</h3>
+    <h3 class="text-muted kickfont menuitem">Kicksplorer</h3>
   </div>
 
   <div class="jumbotron">
-    <h1 class="jumbo kickfont" id="jumboh1">Welcome To Kicksplorer</h1>
+    <h1 class="jumbo" id="jumboh1">Welcome To <span class="kickfont menuitem">Kicksplorer</span></h1>
     <br>
 
     <p class="lead jumbo">
@@ -29,31 +29,33 @@
         <%= form_for @project, url: {action: "kicksplore"}, remote: true do |f| %>
         <%= f.label :category, "Please Select A Category" %>
         <%= f.select :category, Project.categories, style: 'height: 30px;' %>
-        <%= f.submit "Kicksplore!", remote: true, class: "btn btn-lg btn-success" %>
+        <span class="kickfont"><%= f.submit "Kicksplore!", class: "btn btn-lg btn-success" %></span>
         <% end %>
 
     <p>
    </p>
 
   </div>
-    <div class="row marketing project">
+    <div class="row marketing project" style="text-align:center;">
           <div class="col-lg-6">
       <img src="<%= @start.photo %>" style="border-radius: 5px;">
     </div>
 
-    <div class="col-lg-6">
-      <h4><%= @start.name %></h4><br>
-        Project Category: <%= @start.category %>
-        <br><br>
-        <%= @start.blurb %>
-        <br><br>
-        This project is currently funded at  <%= @start.currency_symbol %><%= @start.pledged %> with a goal of <%= @start.currency_symbol %><%= @start.goal %>
-        <br><br>
-        This project is currently backed by <%= @start.backers_count %> backers.
-        <br><br>
-        It expires in <%= distance_of_time_in_words(Time.now, Time.at(@start.deadline)) %>
-        <br><br>
-        If you want to see more about this project, visit it's page on <a href="<%= @start.urls %>" target="_blank">Kickstarter</a>
-    </div>
+      <div class="col-lg-6">
+          <br>
+          <h4 class="menuitem"><%= @start.name %></h4><br>
+            Project Category: <%= @start.category %>
+            <br><br>
+            <%= @start.blurb %>
+            <br><br>
+            This project is currently funded at  <%= @start.currency_symbol %><%= @start.pledged %> with a goal of <%= @start.currency_symbol %><%= @start.goal %>
+            <br><br>
+            This project is currently backed by <%= @start.backers_count %> backers.
+            <br><br>
+            It expires in <%= distance_of_time_in_words(Time.now, Time.at(@start.deadline)) %>
+            <br><br>
+            If you want to see more about this project, visit it's page on <a href="<%= @start.urls %>" target="_blank">Kickstarter</a>
+            <br><br>
+      </div>
     </div>
 </div>

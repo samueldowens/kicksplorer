@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
-          if project["pledged"] >= (project["goal"] * 0.2) && Time.at(project["deadline"]) > Time.now || !Project.where(ks_id: project["id"]).empty? 
+          if project["pledged"] >= (project["goal"] * 0.2) && (Time.at(project["deadline"]) > Time.now || !Project.where(ks_id: project["id"]).empty?) 
             proj = Project.find_or_create_by(ks_id: project["id"])
             proj.update(
               ks_id: project["id"],
