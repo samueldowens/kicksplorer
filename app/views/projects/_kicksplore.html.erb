@@ -4,7 +4,7 @@
 
     <div class="col-lg-6">
         <h4 class="menuitem"><%= @project.name %></h4><br>
-        Project Category: <%= @project.category %>
+        Project Category: <%= @project.category %> ( # of projects in category: <%= Project.category_size(@project.category) %>)
         <br><br>
         <%= @project.blurb %>
         <br><br>
