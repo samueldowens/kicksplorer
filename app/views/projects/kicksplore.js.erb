@@ -1,5 +1,11 @@
-  $('.project').empty();
-  $('.project').hide().append("<%= j render(partial: 'kicksplore', locals: {project: '@project'} ) %>").fadeIn(300);
+$('.project').empty();
+$('.project').hide().append("<%= j render(partial: 'kicksplore', locals: {project: '@project'} ) %>").fadeIn(300);
+
+setTimeout(function(){
+	$('.make-link').click(function(){
+		window.open($('a.color-link').attr('href'));
+	});
+},300);
 
 $(window).ready(function() {
   $('html, body').animate({scrollTop:$(document).height()}, 'slow');

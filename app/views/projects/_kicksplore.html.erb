@@ -1,9 +1,9 @@
-    <div class="col-lg-6">
+    <div class="col-lg-6 make-link">
       <img src="<%= @project.photo %>" style="border-radius: 5px;">
     </div>
 
-    <div class="col-lg-6">
-        <h4 class="menuitem"><%= @project.name %></h4><br>
+    <div class="col-lg-6 text-background">
+        <h4 class="menuitem make-link"><%= @project.name %></h4><br>
         Project Category: <%= @project.category %>
         <br><br>
         <%= @project.blurb %>
@@ -14,5 +14,5 @@
         <br><br>
         It expires in <%= distance_of_time_in_words(Time.now, Time.at(@project.deadline)) %>
         <br><br>
-        If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank">Kickstarter</a>
+        If you want to see more about this project, visit it's page on <a href="<%= @project.urls %>" target="_blank" class="color-link">Kickstarter</a>
     </div>

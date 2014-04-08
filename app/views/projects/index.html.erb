@@ -37,13 +37,13 @@
 
   </div>
     <div class="row marketing project" style="text-align:center;">
-          <div class="col-lg-6">
+          <div class="col-lg-6 make-link">
       <img src="<%= @start.photo %>" style="border-radius: 5px;">
     </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6 text-background">
           <br>
-          <h4 class="menuitem"><%= @start.name %></h4><br>
+          <h4 class="menuitem make-link"><%= @start.name %></h4><br>
             Project Category: <%= @start.category %>
             <br><br>
             <%= @start.blurb %>
@@ -54,7 +54,7 @@
             <br><br>
             It expires in <%= distance_of_time_in_words(Time.now, Time.at(@start.deadline)) %>
             <br><br>
-            If you want to see more about this project, visit it's page on <a href="<%= @start.urls %>" target="_blank">Kickstarter</a>
+            If you want to see more about this project, visit it's page on <a href="<%= @start.urls %>" target="_blank" class="color-link">Kickstarter</a>
             <br><br>
       </div>
     </div>

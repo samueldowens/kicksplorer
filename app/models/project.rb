@@ -2,7 +2,7 @@ require 'open-uri'
 class Project < ActiveRecord::Base
 
   def self.project_url
-    "http://www.kickstarter.com/projects/search.json?page=#{page_num}&term=#{letter}"
+    "https://www.kickstarter.com/projects/search.json?page=#{page_num}&term=#{letter}"
   end
 
   def self.scrape
@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
     page_num = 1
     while letter != "aa"
       while page_num < 31
-        url = URI.parse("http://www.kickstarter.com/projects/search.json?page=#{page_num}&term=#{letter}")
+        url = URI.parse("https://www.kickstarter.com/projects/search.json?page=#{page_num}&term=#{letter}")
         result = JSON.parse(open(url).read)
         result.first[1].size.times do |x|
           project = result.first[1][(x)]
@@ -46,11 +46,11 @@ class Project < ActiveRecord::Base
       letter.next!
       page_num = 1
     end
-    # self.remove_expired
+    self.remove_expired
   end
 
   def self.remove_expired
-    tbd = Project.all.select {|project| Time.at(project.deadline) < Time.now }
+    tbd = Project.all.select { |project| Time.at(project.deadline) < Time.now }
       if !tbd.empty? 
         tbd.each do |project|
           project.destroy
