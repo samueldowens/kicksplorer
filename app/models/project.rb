@@ -49,6 +49,45 @@ class Project < ActiveRecord::Base
     self.remove_expired
   end
 
+   def self.alt_scrape
+    page_num = 1
+      while page_num < 2000
+        url = URI.parse("https://www.kickstarter.com/projects/search.json?page=#{page_num}")
+        result = JSON.parse(open(url).read)
+        result.first[1].size.times do |x|
+          project = result.first[1][(x)]
+          if project["pledged"] >= (project["goal"] * 0.2) && (Time.at(project["deadline"]) > Time.now || !Project.where(ks_id: project["id"]).empty?) 
+            proj = Project.find_or_create_by(ks_id: project["id"])
+            proj.update(
+              ks_id: project["id"],
+              name: project["name"], 
+              blurb: project["blurb"], 
+              goal: project["goal"], 
+              pledged: project["pledged"], 
+              state: project["state"], 
+              country: project["country"], 
+              currency: project["currency"], 
+              currency_symbol: project["currency_symbol"], 
+              deadline: project["deadline"], 
+              # created_at: project["created_at"], 
+              launched_at: project["launched_at"], 
+              backers_count: project["backers_count"], 
+              photo: project["photo"]["full"], 
+              creator: project["creator"]["name"], 
+              location: project["location"]["short_name"], 
+              category: project["category"]["name"], 
+              urls: project["urls"]["web"]["project"]
+            )
+            proj.save
+          end
+          puts page_num
+        end
+        page_num += 1
+      end
+      page_num = 1
+    self.remove_expired
+  end
+
   def self.remove_expired
     tbd = Project.all.select { |project| Time.at(project.deadline) < Time.now }
       if !tbd.empty? 
